@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Allocate Student</h3>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="mb-2">{{ form.student_email.label }} {{ form.student_email(class="form-control") }}</div>
+  <div class="mb-2">{{ form.room_no.label }} {{ form.room_no(class="form-control") }}</div>
+  <div>{{ form.submit(class="btn btn-primary") }}</div>
+</form>
+{% endblock %}

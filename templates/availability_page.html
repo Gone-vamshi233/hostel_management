@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Room Availability</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Room No</th>
+      <th>Block</th>
+      <th>Capacity</th>
+      <th>Occupied</th>
+      <th>Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for room in rooms %}
+    <tr>
+      <td>{{ room.room_no }}</td>
+      <td>{{ room.block }}</td>
+      <td>{{ room.capacity }}</td>
+      <td>{{ room.occupants }}</td>
+      <td>{{ room.capacity - room.occupants }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Dashboard</h3>
+
+{% if current_user.role == "admin" %}
+  <p><a class="btn btn-primary" href="{{ url_for('rooms') }}">Manage Rooms</a>
+  <a class="btn btn-secondary" href="{{ url_for('students') }}">Students</a></p>
+  <h5>All Rooms</h5>
+  <ul>
+    {% for r in rooms %}
+      <li>{{ r.room_no }} ({{ r.occupants }}/{{ r.capacity }})</li>
+    {% endfor %}
+  </ul>
+{% elif current_user.role == "warden" %}
+  <p><a class="btn btn-primary" href="{{ url_for('rooms') }}">Manage Rooms</a>
+  <a class="btn btn-warning" href="{{ url_for('complaints') }}">Complaints</a></p>
+{% else %}
+  <h5>Your Allocation</h5>
+  {% if allocation and allocation.active %}
+    <p>Room: {{ allocation.room.room_no }} (since {{ allocation.since.strftime("%Y-%m-%d") }})</p>
+  {% else %}
+    <p>No active allocation. Contact admin or apply.</p>
+  {% endif %}
+  <p><a class="btn btn-info" href="{{ url_for('complaints') }}">Submit Complaint</a></p>
+{% endif %}
+{% endblock %}
